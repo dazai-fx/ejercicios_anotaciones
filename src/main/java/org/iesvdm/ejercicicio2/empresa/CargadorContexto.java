@@ -6,39 +6,35 @@ public class CargadorContexto {
 
     public static ArrayList<Empleado> cargaContextoEmpresa() {
 
-        org.iesvdm.ejercicicio2.anotacion.Empleado[] empleadosAnotacion = Empresa.class.getAnnotationsByType(org.iesvdm.ejercicicio2.anotacion.Empleado.class);
+        org.iesvdm.ejercicicio2.anotacion.Directivo[] empleadosAnotacionDirectivos = Empresa.class.getAnnotationsByType(org.iesvdm.ejercicicio2.anotacion.Directivo.class);
+
+        org.iesvdm.ejercicicio2.anotacion.Tecnico[] empleadosAnotacionTecnico = Empresa.class.getAnnotationsByType(org.iesvdm.ejercicicio2.anotacion.Tecnico.class);
+
+        org.iesvdm.ejercicicio2.anotacion.Oficial[] empleadosAnotacionOficial = Empresa.class.getAnnotationsByType(org.iesvdm.ejercicicio2.anotacion.Oficial.class);
 
         ArrayList<Empleado> listaEmpleados = new ArrayList<>();
 
-        for (org.iesvdm.ejercicicio2.anotacion.Empleado empleado: empleadosAnotacion){
+        for (org.iesvdm.ejercicicio2.anotacion.Directivo empleado: empleadosAnotacionDirectivos) {
 
             // propiedades comunes a todos los empleados
-            String nombre= empleado.nombre();
-            String apellido = empleado.apellido();
-            String dni = empleado.dni();
-            String direccion = empleado.direccion();
-            String telefono = empleado.telefono();
-            String clase = empleado.clase();// Propiedad para filtrar el tipo de empleado
+            String nombre= empleado.empleado().nombre();
+            String apellido = empleado.empleado().apellido();
+            String dni = empleado.empleado().dni();
+            String direccion = empleado.empleado().direccion();
+            String telefono = empleado.empleado().telefono();
+            String clase = empleado.empleado().clase();
 
-            if(clase.equalsIgnoreCase("Directivo")){
+            int codigoDespacho = empleado.codDespacho();
 
-                int codigoDespacho = empleado.codigoDespacho();
+            Directivo empleadoDirectivo = new Directivo(nombre, apellido, dni, direccion, telefono, clase, codigoDespacho);
 
-                Directivo empleadoDirectivo = new Directivo(nombre, apellido, dni, direccion, telefono, clase, codigoDespacho);
-
-                listaEmpleados.add(empleadoDirectivo);
+            listaEmpleados.add(empleadoDirectivo);
 
 
-            }else if(clase.equalsIgnoreCase("Tecnico")){
+        }
 
-                int codigoTaller = empleado.codigoTaller();
-                String perfil = empleado.perfil();
-
-                Tecnico empleadoTecnio = new Tecnico(nombre, apellido, dni, direccion, telefono, clase, codigoTaller, perfil);
-
-                listaEmpleados.add(empleadoTecnio);
-
-            }else if(clase.equalsIgnoreCase("Oficial")){
+        /*
+        * else if(clase.equalsIgnoreCase("Oficial")){
 
                 int codigoTaller = empleado.codigoTaller();
                 String categoria = empleado.categoria();
@@ -47,13 +43,48 @@ public class CargadorContexto {
 
                 listaEmpleados.add(empleadoOficial);
 
-            }else{
-                System.out.println("Error con empleado, solo se pueden crear empleados directivo, tecnico o oficial");
             }
+        * */
+
+        for (org.iesvdm.ejercicicio2.anotacion.Tecnico empleado: empleadosAnotacionTecnico) {
+
+            // propiedades comunes a todos los empleados
+            String nombre= empleado.empleado().nombre();
+            String apellido = empleado.empleado().apellido();
+            String dni = empleado.empleado().dni();
+            String direccion = empleado.empleado().direccion();
+            String telefono = empleado.empleado().telefono();
+            String clase = empleado.empleado().clase();
+
+            int codigoTaller = empleado.codTaller();
+            String perfil = empleado.perfil();
+            Tecnico empleadoTecnio = new Tecnico(nombre, apellido, dni, direccion, telefono, clase, codigoTaller, perfil);
+
+            listaEmpleados.add(empleadoTecnio);
 
         }
 
-        return listaEmpleados;
+        for (org.iesvdm.ejercicicio2.anotacion.Oficial empleado: empleadosAnotacionOficial) {
+
+            // propiedades comunes a todos los empleados
+            String nombre= empleado.empleado().nombre();
+            String apellido = empleado.empleado().apellido();
+            String dni = empleado.empleado().dni();
+            String direccion = empleado.empleado().direccion();
+            String telefono = empleado.empleado().telefono();
+            String clase = empleado.empleado().clase();
+
+            int codigoTaller = empleado.codTaller();
+            String categoria = empleado.categoria();
+
+            Oficial empleadoOficial = new Oficial(nombre, apellido, dni, direccion, telefono, clase, codigoTaller, categoria);
+
+            listaEmpleados.add(empleadoOficial);
+
+        }
+
+
+            return listaEmpleados;
 
     }
 

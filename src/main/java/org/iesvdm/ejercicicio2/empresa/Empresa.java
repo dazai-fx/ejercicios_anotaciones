@@ -1,6 +1,8 @@
 package org.iesvdm.ejercicicio2.empresa;
 
 import org.iesvdm.ejercicicio2.anotacion.Directivo;
+import org.iesvdm.ejercicicio2.anotacion.Oficial;
+import org.iesvdm.ejercicicio2.anotacion.Tecnico;
 import org.iesvdm.ejercicicio2.anotacion.Empleado;
 import org.iesvdm.ejercicicio2.anotacion.Empleados;
 
@@ -27,22 +29,47 @@ import java.util.Objects;
         telefono = "625589329",
         clase = "Directivo"
 )*/
-@Empleados({
-        @Empleado(nombre = "jose Antonio",  apellido = "Lopez Gomez", dni = "7928304", direccion = "ctra de ligeron urb los alamos piso 12", telefono = "662489329", clase = "Directivo", codigoDespacho=1),
-        @Empleado(nombre = "Antonio Jose",  apellido = "Gomez López", dni = "8028304", direccion = "ctra de ligeron urb los alamos piso 22", telefono = "664089329", clase = "Tecnico", perfil = "administrador", codigoTaller=1),
-        @Empleado(nombre = "Manuel Javier",  apellido = "Juan Antonio", dni = "2228304", direccion = "calle 12 urb alola casa 12", telefono = "665589329", clase = "Oficial", categoria = "categoria random", codigoTaller=2)
-})
 
-/*@Directivo(
-        nombre = "Manuel",
-        apellido = "Mil",
-        dni = "79840302",
-        direccion = "ctra de los montes casa 2",
-        telefono = "669840398",
-        clase = "Directivo",
+
+@Directivo(
+        empleado = @Empleado(
+                nombre = "Javier",
+                apellido = "Jimenez",
+                dni = "79840302",
+                direccion = "ctra de los montes casa 2",
+                telefono = "669840398",
+                clase = "Directivo"
+        ),
         codDespacho = 2
 )
-*/
+@Oficial(
+
+        empleado = @Empleado(
+                nombre = "Javier",
+                apellido = "Jimenez",
+                dni = "79840302",
+                direccion = "ctra de los montes casa 2",
+                telefono = "669840398",
+                clase = "Oficial"
+        ),
+        codTaller = 1,
+        categoria = "Adminitrstadores")
+
+@Tecnico(
+
+        empleado = @Empleado(
+                nombre = "Javier",
+                apellido = "Jimenez",
+                dni = "79840302",
+                direccion = "ctra de los montes casa 2",
+                telefono = "669840398",
+                clase = "Tecnico"
+        ),
+        codTaller = 1,
+        perfil = "Tecnico en sistemas"
+
+)
+
 public class Empresa {
 
     private String nombre;
